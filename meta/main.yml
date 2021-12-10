@@ -2,9 +2,9 @@
   galaxy_info:
     author: Michal Muransky
     role_name: nexus_config
-    namespace: monolithprojects
+    namespace: lablabs
     description: Configure Sonatype Nexus Repository Manager
-    company: MonolithProjects
+    company: lablabs
     license: "license (MIT)"
     min_ansible_version: 2.10
     platforms:
@@ -24,6 +24,7 @@
         versions:
           - buster
           - stretch
+          - bullseye
       - name: Ubuntu
         versions:
           - xenial
