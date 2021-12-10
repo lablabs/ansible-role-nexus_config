@@ -1,5 +1,5 @@
 {
-  "name": "s3",
+  "name": "{{ item.name }}",
   {% if item.soft_quota %}
   "softQuota": {
     "type": "spaceRemainingQuota",
