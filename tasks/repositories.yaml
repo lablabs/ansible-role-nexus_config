@@ -1,0 +1,69 @@
+---
+
+- name: Check if Repository "{{ item.name }}" already exist
+  uri:
+    url: "{{ api_protocol }}://{{ ansible_host }}:{{ api_port }}/service/rest/v1/repositories"
+    user: "{{ admin_username }}"
+    password: "{{ admin_password }}"
+    method: GET
+    status_code: 200
+    force_basic_auth: true
+  no_log: "{{ hide_sensitive_logs }}"
+  delegate_to: localhost
+  register: existing_repos
+
+- name: Create if Repository "{{ item.name }}"
+  uri:
+    url: "{{ api_protocol }}://{{ ansible_host }}:{{ api_port }}/service/rest/v1/repositories/{{ item.type }}/{{ item.kind }}"
+    user: "{{ admin_username }}"
+    password: "{{ admin_password }}"
+    body: "{{ lookup('template','repo_{{ item.type }}_{{ item.kind }}.json.j2') }}"
+    method: POST
+    status_code: [201, 204]
+    force_basic_auth: true
+    headers:
+      Content-Type: application/json
+    body_format: json
+  no_log: "{{ hide_sensitive_logs }}"
+  register: changes
+  changed_when: changes.status == [201, 204]
+  delegate_to: localhost
+  when:
+    - item.online != "deleted"
+    - item.name not in ( existing_repos | community.general.json_query('json[*].name'))
+
+- name: Sync if Repository "{{ item.name }}" setings
+  uri:
+    url: "{{ api_protocol }}://{{ ansible_host }}:{{ api_port }}/service/rest/v1/repositories/{{ item.type }}/{{ item.kind }}/{{ item.name }}"
+    user: "{{ admin_username }}"
+    password: "{{ admin_password }}"
+    body: "{{ lookup('template','repo_{{ item.type }}_{{ item.kind }}.json.j2') }}"
+    method: PUT
+    status_code: 204
+    force_basic_auth: true
+    headers:
+      Content-Type: application/json
+    body_format: json
+  no_log: "{{ hide_sensitive_logs }}"
+  register: changes
+  changed_when: changes.status == 204
+  delegate_to: localhost
+  when:
+    - item.online != "deleted"
+    - item.name in ( existing_repos | community.general.json_query('json[*].name'))
+
+- name: Delete if Repository "{{ item.name }}"
+  uri:
+    url: "{{ api_protocol }}://{{ ansible_host }}:{{ api_port }}/service/rest/v1/repositories/{{ item.name }}"
+    user: "{{ admin_username }}"
+    password: "{{ admin_password }}"
+    method: DELETE
+    status_code: 204
+    force_basic_auth: true
+  no_log: "{{ hide_sensitive_logs }}"
+  register: changes
+  changed_when: changes.status == 204
+  delegate_to: localhost
+  when:
+    - item.online == "deleted"
+    - item.name in ( existing_repos | community.general.json_query('json[*].name'))

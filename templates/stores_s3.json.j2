@@ -1,0 +1,33 @@
+{
+  "name": "s3",
+  {% if item.soft_quota %}
+  "softQuota": {
+    "type": "spaceRemainingQuota",
+    "limit": {{ item.soft_quota }}
+  },
+  {% endif %}
+  "bucketConfiguration": {
+    "bucket": {
+      "region": "{{ item.region }}",
+      "name": "{{ item.name }}",
+      "prefix": "{{ item.prefix }}",
+      "expiration": {{ item.expiration_days }}
+    }
+    {# "encryption": {                          # TODO
+      "encryptionType": "s3ManagedEncryption",
+      "encryptionKey": "string"
+    }, #}
+    {# "bucketSecurity": {
+      "accessKeyId": "string",
+      "secretAccessKey": "string",
+      "role": "string",
+      "sessionToken": "string"
+    },
+    "advancedBucketConnection": {
+      "endpoint": "string",
+      "signerType": "string",
+      "forcePathStyle": true,
+      "maxConnectionPoolSize": 0
+    } #}
+  }
+}

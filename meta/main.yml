@@ -1,0 +1,37 @@
+---
+  galaxy_info:
+    author: Michal Muransky
+    role_name: nexus_config
+    namespace: monolithprojects
+    description: Configure Sonatype Nexus Repository Manager
+    company: MonolithProjects
+    license: "license (MIT)"
+    min_ansible_version: 2.10
+    platforms:
+      - name: EL
+        versions:
+          - 6
+          - 7
+          - 8
+      - name: Fedora
+        versions:
+          - 28
+          - 29
+          - 30
+          - 31
+          - 32
+      - name: Debian
+        versions:
+          - buster
+          - stretch
+      - name: Ubuntu
+        versions:
+          - xenial
+          - bionic
+          - focal
+    galaxy_tags:
+      - nexus
+      - repository
+      - system
+      - api
+      - config

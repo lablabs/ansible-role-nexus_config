@@ -1,0 +1,22 @@
+{
+  "name": "{{ item.name }}",
+  "online": {{ item.online }},
+  "storage": {
+    "blobStoreName": "{{ item.blob_store }}",
+    "strictContentTypeValidation": {{ item.strict_content_type_validation }},
+    "writePolicy": "allow_once"
+  },
+  {# "cleanup": {                               # TODO
+    "policyNames": [
+      "string"
+    ]
+  },
+  "component": {
+    "proprietaryComponents": true
+  }, #}
+  "maven": {
+    "versionPolicy": "{{ item.version_policy }}",
+    "layoutPolicy": "{{ item.layout_policy }}",
+    "contentDisposition": "{{ item.content }}"
+  }
+}

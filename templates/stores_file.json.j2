@@ -1,0 +1,10 @@
+{
+  {% if item.soft_quota %}
+  "softQuota": {
+    "type": "spaceRemainingQuota",
+    "limit": {{ item.soft_quota }}
+  },
+  {% endif %}
+  "path": "{{ item.path }}",
+  "name": "{{ item.name }}"
+}

@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include nexus-config"
+      include_role:
+        name: "nexus-config"

@@ -1,0 +1,58 @@
+{
+  "name": "{{ item.name }}",
+  "online": {{ item.online }},
+  "storage": {
+    "blobStoreName": "{{ item.blob_store }}",
+    "strictContentTypeValidation": {{ item.strict_content_type_validation }}
+  },
+  {# "cleanup": {                 # TODO
+    "policyNames": [
+      "string"
+    ]
+  }, #}
+  "proxy": {
+    "remoteUrl": "{{ item.remote_url }}",
+    "contentMaxAge": {{ item.maximum_artifacts_age }},
+    "metadataMaxAge": {{ item.maximum_metadata_age }}
+  },
+  "negativeCache": {
+    "enabled": {{ item.negative_cache }},
+    "timeToLive": {{ item.not_found_cache_ttl }}
+  },
+
+  "httpClient": {
+    "blocked": {{ item.http_client.blocked | default(false)}},
+    "autoBlock": {{ item.http_client.auto_block | default(true) }},
+    {% if item.http_client.connection is defined %}
+    "connection": {
+      "retries": {{ item.http_client.connection.retries }},
+      "userAgentSuffix": "{{ item.http_client.connection.user_agent_suffix }}",
+      "timeout": {{ item.http_client.connection.timeout }},
+      "enableCircularRedirects": {{ item.http_client.connection.enable_circular_redirects }},
+      "enableCookies": {{ item.http_client.connection.enable_cookies }},
+      "useTrustStore": {{ item.http_client.connection.user_trust_store }}
+    }
+    {% if item.http_client.authentication is defined %}
+    ,
+    {% endif %}
+    {% endif %}
+    {% if item.http_client.authentication is defined %}
+    "authentication": {
+      "type": "{{ item.http_client.authentication.type }}",
+      "username": "{{ item.http_client.authentication.username }}",
+      "password": "{{ item.http_client.authentication.password }}",
+      "ntlmHost": "{{ item.http_client.authentication.ntlm_host }}",
+      "ntlmDomain": "{{ item.http_client.authentication.ntlm_domain }}",
+      "preemptive": {{ item.http_client.authentication.preemptive }}
+    }
+    {% endif %}
+  },
+  {% if item.routing_rule is defined %}
+  "routingRule": "{{ item.routing_rule }}",
+  {% endif %}
+  "maven": {
+    "versionPolicy": "{{ item.version_policy }}",
+    "layoutPolicy": "{{ item.layout_policy }}",
+    "contentDisposition": "{{ item.content }}"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "userId": "{{ item.id }}",
+  "firstName": "{{ item.first_name }}",
+  "lastName": "{{ item.last_name }}",
+  "emailAddress": "{{ item.email }}",
+  {% if item.id not in (existing_users | json_query('json[*].userId')) %}
+  "password": "{{ item.password }}",
+  {% else %}
+  "source": "{{ item.source }}",
+  {% endif %}
+  "status": "{{ item.status }}",
+  "roles": [
+  {% for role in item.roles %}
+    "{{ role }}"{% if not loop.last %},{% endif %}
+  {% endfor %}
+  ]
+}
