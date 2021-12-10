@@ -3,7 +3,7 @@
 [![Galaxy Quality](https://img.shields.io/ansible/quality/57217?style=flat&logo=ansible)](https://galaxy.ansible.com/lablabs/nexus_config)
 [![Role version](https://img.shields.io/github/v/release/lablabs/ansible-role-nexus_config)](https://galaxy.ansible.com/lablabs/nexus_config)
 [![Role downloads](https://img.shields.io/ansible/role/d/57217)](https://galaxy.ansible.com/lablabs/nexus_config)
-[![GitHub Actions](https://github.com/lablabs/ansible-role-nexus_config/actions/workflows/lint.yaml/badge.svg)](https://github.com/lablabs/ansible-role-nexus_config/actions)
+[![molecule lint](https://github.com/lablabs/ansible-role-nexus_config/actions/workflows/lint.yml/badge.svg)](https://github.com/lablabs/ansible-role-nexus_config/actions/workflows/lint.yml)
 [![License](https://img.shields.io/github/license/lablabs/ansible-role-nexus_config)](https://github.com/lablabs/ansible-role-nexus_config/blob/main/LICENSE)
 
 [<img src="ll-logo.png">](https://lablabs.io/)
