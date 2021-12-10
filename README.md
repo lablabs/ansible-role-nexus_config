@@ -9,7 +9,7 @@
 [<img src="ll-logo.png">](https://lablabs.io/)
 
 This Ansible role will configure [Sonatype Nexus Repository Manager](https://www.sonatype.com/products/repository-oss?topnav=true) using the Rest API.
-Currently this role is just an MVP. It supports:
+Currently this role is covers:
 
 - [x] Initial admin password setup
 - [x] Users creation
