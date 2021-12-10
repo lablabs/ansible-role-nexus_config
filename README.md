@@ -1,10 +1,10 @@
 # Sonatype Nexus Repository Manager configuration
 
-[![Galaxy Quality](https://img.shields.io/ansible/quality/57217?style=flat&logo=ansible)](https://galaxy.ansible.com/lablabs/wireguard)
-[![Role version](https://img.shields.io/github/v/release/lablabs/ansible-role-wireguard)](https://galaxy.ansible.com/lablabs/wireguard)
-[![Role downloads](https://img.shields.io/ansible/role/d/57217)](https://galaxy.ansible.com/lablabs/wireguard)
-[![GitHub Actions](https://github.com/lablabs/ansible-role-wireguard/actions/workflows/lint.yaml/badge.svg)](https://github.com/lablabs/ansible-role-wireguard/actions)
-[![License](https://img.shields.io/github/license/lablabs/ansible-role-wireguard)](https://github.com/lablabs/ansible-role-wireguard/blob/main/LICENSE)
+[![Galaxy Quality](https://img.shields.io/ansible/quality/57217?style=flat&logo=ansible)](https://galaxy.ansible.com/lablabs/nexus_config)
+[![Role version](https://img.shields.io/github/v/release/lablabs/ansible-role-nexus_config)](https://galaxy.ansible.com/lablabs/nexus_config)
+[![Role downloads](https://img.shields.io/ansible/role/d/57217)](https://galaxy.ansible.com/lablabs/nexus_config)
+[![GitHub Actions](https://github.com/lablabs/ansible-role-nexus_config/actions/workflows/lint.yaml/badge.svg)](https://github.com/lablabs/ansible-role-nexus_config/actions)
+[![License](https://img.shields.io/github/license/lablabs/ansible-role-nexus_config)](https://github.com/lablabs/ansible-role-nexus_config/blob/main/LICENSE)
 
 [<img src="ll-logo.png">](https://lablabs.io/)
 
