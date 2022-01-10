@@ -8,6 +8,7 @@
     force_basic_auth: true
     return_content: true
     status_code: 200
+    timeout: 5
   delegate_to: localhost
   run_once: true
   no_log: "{{ hide_sensitive_logs }}"
@@ -17,7 +18,6 @@
     - initial_check.status != 200
     - initial_check.status != 401
   retries: 30
-  timeout: 5
   delay: 5
 
 - name: Set admin password
