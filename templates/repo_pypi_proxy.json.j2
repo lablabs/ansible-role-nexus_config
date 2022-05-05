@@ -47,16 +47,10 @@
       "password": "{{ item.http_client.authentication.password }}",
       "ntlmHost": "{{ item.http_client.authentication.ntlm_host }}",
       "ntlmDomain": "{{ item.http_client.authentication.ntlm_domain }}",
-      "preemptive": {{ item.http_client.authentication.preemptive }}
     }
     {% endif %}
   },
   {% if item.routing_rule is defined %}
   "routingRule": "{{ item.routing_rule }}",
   {% endif %}
-  "maven": {
-    "versionPolicy": "{{ item.version_policy }}",
-    "layoutPolicy": "{{ item.layout_policy }}",
-    "contentDisposition": "{{ item.content }}"
-  }
 }

@@ -1,0 +1,19 @@
+{
+  "name": "{{ item.name }}",
+  "online": {{ item.online }},
+  "storage": {
+    "blobStoreName": "{{ item.blob_store }}",
+    "strictContentTypeValidation": {{ item.strict_content_type_validation }}
+  },
+  "group": {
+    "memberNames": [
+      {% for repo in item.group %}
+      "{{ repo }}"{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  },
+  "docker": {
+    "v1Enabled": {{ item.v1_enabled }},
+    "forceBasicAuth": {{ item.force_basic_auth }},
+  },
+}

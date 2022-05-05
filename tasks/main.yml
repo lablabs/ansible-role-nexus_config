@@ -1,7 +1,7 @@
 ---
 - name: Connection check
   uri:
-    url: "{{ api_protocol }}://{{ ansible_host }}:{{ api_port }}/service/rest/v1/status"
+    url: "{{ api_protocol }}://{{ api_host }}:{{ api_port }}/service/rest/v1/status"
     user: "{{ admin_username }}"
     password: "{{ initial_admin_password }}"
     method: GET
@@ -9,6 +9,7 @@
     return_content: true
     status_code: 200
     timeout: 5
+    ca_path: "{{ root_ca }}"
   delegate_to: localhost
   run_once: true
   no_log: "{{ hide_sensitive_logs }}"
@@ -22,7 +23,7 @@
 
 - name: Set admin password
   uri:
-    url: "{{ api_protocol }}://{{ ansible_host }}:{{ api_port }}/service/rest/v1/security/users/admin/change-password"
+    url: "{{ api_protocol }}://{{ api_host }}:{{ api_port }}/service/rest/v1/security/users/admin/change-password"
     user: "{{ admin_username }}"
     password: "{{ initial_admin_password }}"
     body: "{{ admin_password }}"
@@ -31,6 +32,7 @@
     force_basic_auth: true
     headers:
       Content-Type: text/plain
+    ca_path: "{{ root_ca }}"
   register: changes
   changed_when: changes.status == [200, 204]
   delegate_to: localhost
@@ -40,7 +42,7 @@
 
 - name: Set Anonymous Access
   uri:
-    url: "{{ api_protocol }}://{{ ansible_host }}:{{ api_port }}/service/rest/v1/security/anonymous"
+    url: "{{ api_protocol }}://{{ api_host }}:{{ api_port }}/service/rest/v1/security/anonymous"
     user: "{{ admin_username }}"
     password: "{{ admin_password }}"
     body: "{{ lookup('template','anonymous.json.j2') }}"
@@ -50,11 +52,17 @@
     headers:
       Content-Type: application/json
     body_format: json
+    ca_path: "{{ root_ca }}"
   register: changes
   changed_when: changes.status == 200
   delegate_to: localhost
   run_once: true
   no_log: "{{ hide_sensitive_logs }}"
+
+- name: Role management
+  include_tasks: roles.yaml
+  no_log: true
+  with_items: "{{ roles }}"
 
 - name: User management
   include_tasks: users.yaml
