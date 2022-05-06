@@ -1,8 +1,8 @@
 ---
 
-- name: Check if user "{{ item.id }}" already exist
+- name: Check if role "{{ item.id }}" already exist
   uri:
-    url: "{{ api_protocol }}://{{ api_host }}:{{ api_port }}/service/rest/v1/security/users"
+    url: "{{ api_protocol }}://{{ api_host }}:{{ api_port }}/service/rest/v1/security/roles"
     user: "{{ admin_username }}"
     password: "{{ admin_password }}"
     method: GET
@@ -11,14 +11,14 @@
     ca_path: "{{ root_ca }}"
   no_log: "{{ hide_sensitive_logs }}"
   delegate_to: localhost
-  register: existing_users
+  register: existing_roles
 
-- name: Create user "{{ item.id }}"
+- name: Create role "{{ item.id }}"
   uri:
-    url: "{{ api_protocol }}://{{ api_host }}:{{ api_port }}/service/rest/v1/security/users"
+    url: "{{ api_protocol }}://{{ api_host }}:{{ api_port }}/service/rest/v1/security/roles"
     user: "{{ admin_username }}"
     password: "{{ admin_password }}"
-    body: "{{ lookup('template','user.json.j2') }}"
+    body: "{{ lookup('template','role.json.j2') }}"
     method: POST
     status_code: 200
     force_basic_auth: true
@@ -32,14 +32,14 @@
   delegate_to: localhost
   when:
     - item.status != "deleted"
-    - item.id not in ( existing_users | community.general.json_query('json[*].userId'))
+    - item.id not in ( existing_roles | community.general.json_query('json[*].id'))
 
-- name: Sync user "{{ item.id }}" setings
+- name: Sync role "{{ item.id }}" setings
   uri:
-    url: "{{ api_protocol }}://{{ api_host }}:{{ api_port }}/service/rest/v1/security/users/{{ item.id }}"
+    url: "{{ api_protocol }}://{{ api_host }}:{{ api_port }}/service/rest/v1/security/roles/{{ item.id }}"
     user: "{{ admin_username }}"
     password: "{{ admin_password }}"
-    body: "{{ lookup('template','user.json.j2') }}"
+    body: "{{ lookup('template','role.json.j2') }}"
     method: PUT
     status_code: 204
     force_basic_auth: true
@@ -53,11 +53,11 @@
   delegate_to: localhost
   when:
     - item.status != "deleted"
-    - item.id in ( existing_users | community.general.json_query('json[*].userId'))
+    - item.id in ( existing_roles | community.general.json_query('json[*].id'))
 
-- name: Delete user "{{ item.id }}"
+- name: Delete role "{{ item.id }}"
   uri:
-    url: "{{ api_protocol }}://{{ api_host }}:{{ api_port }}/service/rest/v1/security/users/{{ item.id }}"
+    url: "{{ api_protocol }}://{{ api_host }}:{{ api_port }}/service/rest/v1/security/roles/{{ item.id }}"
     user: "{{ admin_username }}"
     password: "{{ admin_password }}"
     method: DELETE
@@ -70,4 +70,4 @@
   delegate_to: localhost
   when:
     - item.status == "deleted"
-    - item.id in ( existing_users | community.general.json_query('json[*].userId'))
+    - item.id in ( existing_roles | community.general.json_query('json[*].id'))

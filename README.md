@@ -9,7 +9,7 @@
 [<img src="ll-logo.png">](https://lablabs.io/)
 
 This Ansible role will configure [Sonatype Nexus Repository Manager](https://www.sonatype.com/products/repository-oss?topnav=true) using the Rest API.
-Currently this role is covers:
+Currently, this role is covers:
 
 - [x] Initial admin password setup
 - [x] Users creation
@@ -24,12 +24,12 @@ Currently this role is covers:
 - [ ] Blob storage (Azure) creation
 - [ ] Blob storage (Azure) update
 - [ ] Blob storage (Azure) deletion
-- [x] Repositories (Maven) creation
-- [x] Repositories (Maven) update
-- [x] Repositories (Maven) deletion
-- [ ] Roles creation
-- [ ] Roles update
-- [ ] Roles detetion
+- [x] Repositories (Maven, Docker, PyPi, Conda) creation
+- [x] Repositories (Maven, Docker, PyPi, Conda) update
+- [x] Repositories (Maven, Docker, PyPi, Conda) deletion
+- [x] Roles creation
+- [x] Roles update
+- [x] Roles detetion
 - TBD ...
 
 ## Requirements
@@ -52,11 +52,17 @@ initial_admin_password: admin123
 # Admin password which will be set during the initial setup.
 admin_password: "{{ lookup('env', 'ADMIN_PASSWORD') }}"
 
+# Nexus API host
+api_host: localhost
+
 # Nexus API port
 api_port: 8081
 
 # Nexus endpoint protocol
 api_protocol: http
+
+# Path to root ca .pem file, if https with custom ssl is used
+root_ca:
 
 # Hide sensitive Ansible error logs (may contain passwords)
 hide_sensitive_logs: true
@@ -84,6 +90,17 @@ users: []
   #   roles:
   #     - nx-anonymous
 
+roles: []
+  #  - id: nx-role                         # Role ID
+  #    name: nx-role                       # Role name
+  #    description: Some new role          # Role description
+  #    status: created                     # Status of the role. You can set created or deleted to delete the role.
+  #    privileges:                         # Privileges to include
+  #      - nx-repository-view-*-*-add
+  #      - nx-repository-view-*-*-browse
+  #      - nx-repository-view-*-*-read
+  #    roles: [ ]                          # Roles to include
+
 stores: []
   # - name: file_blob             # Blob Store name
   #   type: file                  # Blob Store type (file, s3)
@@ -105,6 +122,8 @@ repositories: []
   #   kind: hosted                                  # Repository kind (hosted, proxy)
   #   blob_store: default                           # Blob storeage
   #   strict_content_type_validation: false         # Strict Content Type Validation
+  #   write_policy: allow                           # Controls if deployments of and updates to assets are allowed (allow, allow_once, deny)
+  #   cleanup_names: []                             # Cleanup policies names. Omit if no cleanup is needed.
   #   version_policy: MIXED                         # Version Policy (MIXED, RELEASE, SNAPSHOT)
   #   layout_policy: STRICT                         # Layout Policy (STRICT, PERMISSIVE)
   #   content: INLINE                               # Content Disposition (INLINE)
@@ -130,8 +149,8 @@ repositories: []
   #       enable_circular_redirects: false
   #       enable_cookies: false
   #       user_trust_store: false
-  #     authentication:                               # Remote repo authentication
-  #       type: username                              # Authetication type (username, ntlm)
+  #     authentication:                             # Remote repo authentication
+  #       type: username                            # Authentication type (username, ntlm)
   #       username: joe
   #       password: nbusr123
   #       ntlm_host:
@@ -151,6 +170,37 @@ repositories: []
   #   group:
   #     - maven-releases
   #     - maven-snapshots
+
+  #  - name: docker-hub-proxy
+  #    online: true
+  #    type: docker
+  #    kind: proxy
+  #    blob_store: default
+  #    strict_content_type_validation: false
+  #    remote_url: "https://index.docker.io/"       # Location of the remote repository being proxied (Optional)
+  #    maximum_artifacts_age: -1
+  #    maximum_metadata_age: 1440
+  #    negative_cache: true
+  #    not_found_cache_ttl: 1440
+  #    routing_rule: null
+  #    v1_enabled: true                             # Whether to allow clients to use the V1 API to interact with this repository
+  #    force_basic_auth: true                       # Whether to force authentication (Docker Bearer Token Realm required if false)
+  #    index_type: "REGISTRY"                       # Type of Docker Index (HUB, REGISTRY, CUSTOM)
+  #    index_url: "https://index.docker.io/"        # Url of Docker Index to use (Optional)
+
+  #  - name: conda-forge-proxy
+  #    online: true
+  #    type: conda
+  #    kind: proxy
+  #    blob_store: default
+  #    strict_content_type_validation: false
+  #    remote_url: "https://conda.anaconda.org/conda-forge/"
+  #    maximum_artifacts_age: -1
+  #    maximum_metadata_age: 1440
+  #    negative_cache: true
+  #    not_found_cache_ttl: 1440
+  #    routing_rule: null
+
 
 ```
 

@@ -15,7 +15,7 @@
     },
   {% endif %}
   "proxy": {
-    "remoteUrl": "{{ item.remote_url }}",
+    {% if item.remote_url is defined %}"remoteUrl": "{{ item.remote_url }}",{% endif %}
     "contentMaxAge": {{ item.maximum_artifacts_age }},
     "metadataMaxAge": {{ item.maximum_metadata_age }}
   },
@@ -47,16 +47,18 @@
       "password": "{{ item.http_client.authentication.password }}",
       "ntlmHost": "{{ item.http_client.authentication.ntlm_host }}",
       "ntlmDomain": "{{ item.http_client.authentication.ntlm_domain }}",
-      "preemptive": {{ item.http_client.authentication.preemptive }}
     }
     {% endif %}
   },
   {% if item.routing_rule is defined %}
   "routingRule": "{{ item.routing_rule }}",
   {% endif %}
-  "maven": {
-    "versionPolicy": "{{ item.version_policy }}",
-    "layoutPolicy": "{{ item.layout_policy }}",
-    "contentDisposition": "{{ item.content }}"
+  "docker": {
+    "v1Enabled": {{ item.v1_enabled }},
+    "forceBasicAuth": {{ item.force_basic_auth }},
+  },
+  "dockerProxy": {
+    {% if item.index_url is defined %}"indexUrl": "{{ item.index_url }},"{% endif %}
+    "indexType": "{{ item.index_type }}"
   }
 }

@@ -1,0 +1,15 @@
+{
+  "id": "{{ item.id }}",
+  "name": "{{ item.name }}",
+  "description": "{{ item.description }}",
+  "privileges": [
+    {% for privilege in item.privileges %}
+    "{{ privilege }}"{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ],
+  "roles": [
+    {% for role in item.roles %}
+    "{{ role }}"{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
