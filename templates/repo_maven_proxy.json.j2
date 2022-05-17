@@ -25,7 +25,7 @@
   },
 
   "httpClient": {
-    "blocked": {{ item.http_client.blocked | default(false)}},
+    "blocked": {{ item.http_client.blocked | default(false) }},
     "autoBlock": {{ item.http_client.auto_block | default(true) }},
     {% if item.http_client.connection is defined %}
     "connection": {

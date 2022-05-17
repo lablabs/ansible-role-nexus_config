@@ -24,9 +24,9 @@ Currently, this role is covers:
 - [ ] Blob storage (Azure) creation
 - [ ] Blob storage (Azure) update
 - [ ] Blob storage (Azure) deletion
-- [x] Repositories (Maven, Docker, PyPi, Conda) creation
-- [x] Repositories (Maven, Docker, PyPi, Conda) update
-- [x] Repositories (Maven, Docker, PyPi, Conda) deletion
+- [x] Repositories (Maven, Docker, PyPi, Conda, R, npm) creation
+- [x] Repositories (Maven, Docker, PyPi, Conda, R, npm) update
+- [x] Repositories (Maven, Docker, PyPi, Conda, R, npm) deletion
 - [x] Roles creation
 - [x] Roles update
 - [x] Roles detetion
@@ -201,6 +201,31 @@ repositories: []
   #    not_found_cache_ttl: 1440
   #    routing_rule: null
 
+  #  - name: cran-proxy
+  #    online: true
+  #    type: r
+  #    kind: proxy
+  #    blob_store: default
+  #    strict_content_type_validation: false
+  #    remote_url: "https://cloud.r-project.org"
+  #    maximum_artifacts_age: -1
+  #    maximum_metadata_age: 1440
+  #    negative_cache: true
+  #    not_found_cache_ttl: 1440
+  #    routing_rule: null
+
+  #  - name: npm-proxy
+  #    online: true
+  #    type: npm
+  #    kind: proxy
+  #    blob_store: default
+  #    strict_content_type_validation: false
+  #    remote_url: "https://registry.npmjs.org/"
+  #    maximum_artifacts_age: -1
+  #    maximum_metadata_age: 1440
+  #    negative_cache: true
+  #    not_found_cache_ttl: 1440
+  #    routing_rule: null
 
 ```
 
