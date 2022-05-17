@@ -6,7 +6,7 @@
     description: Configure Sonatype Nexus Repository Manager
     company: lablabs
     license: "license (MIT)"
-    min_ansible_version: 2.10
+    min_ansible_version: "2.10"
     platforms:
       - name: EL
         versions:
