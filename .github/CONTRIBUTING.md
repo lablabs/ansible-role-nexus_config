@@ -40,3 +40,15 @@ molecule test
 ## 6. Create a pull request
 
 Please create a pull request into the `main` branch. Here is [how to do it](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork).
+
+## 7. Semantic Commits
+
+Commits must follow conventional specs below:
+
+- `ci:` Changes to our CI configuration files and scripts (example scopes: GitHub Actions)
+- `docs:` Documentation only changes
+- `feat:` A new feature
+- `fix:` A bug fix
+- `refactor:` A code change that neither fixes a bug nor adds a feature
+- `style:` Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+- `test:` Adding missing tests or correcting existing tests
