@@ -1,0 +1,18 @@
+{
+  "name": "{{ item.name }}",
+  "online": {{ item.online }},
+  "storage": {
+    "blobStoreName": "{{ item.blob_store }}",
+    "strictContentTypeValidation": {{ item.strict_content_type_validation }},
+    "writePolicy": "{{ item.write_policy }}"
+  },
+  {% if item.cleanup_names is defined %}
+    "cleanup": {
+      "policyNames": [
+        {% for cleanup in item.cleanup_names %}
+        "{{ cleanup }}"{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ]
+    },
+  {% endif %}
+}

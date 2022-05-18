@@ -15,7 +15,7 @@
     },
   {% endif %}
   "proxy": {
-    {% if item.remote_url is defined %}"remoteUrl": "{{ item.remote_url }}",{% endif %}
+    "remoteUrl": "{{ item.remote_url }}",
     "contentMaxAge": {{ item.maximum_artifacts_age }},
     "metadataMaxAge": {{ item.maximum_metadata_age }}
   },
@@ -53,12 +53,8 @@
   {% if item.routing_rule is defined %}
   "routingRule": "{{ item.routing_rule }}",
   {% endif %}
-  "docker": {
-    "v1Enabled": {{ item.v1_enabled }},
-    "forceBasicAuth": {{ item.force_basic_auth }},
-  },
-  "dockerProxy": {
-    {% if item.index_url is defined %}"indexUrl": "{{ item.index_url }},"{% endif %}
-    "indexType": "{{ item.index_type }}"
+  "npm": {
+      "removeNonCataloged": {{ item.remove_non_cataloged | default(false) }},
+      "removeQuarantined": {{ item.remove_quarantined | default(false) }}
   }
 }
