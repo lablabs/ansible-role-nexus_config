@@ -10,8 +10,8 @@ categories:
       - 'fix'
       - 'bugfix'
       - 'bug'
-  - title: 'Maintenance'
-    label: 'chore'
+  - title: 'Documentation'
+    label: 'documentation'
 change-template: '- $TITLE, by @$AUTHOR (#$NUMBER)'
 template: |
   # What's changed
