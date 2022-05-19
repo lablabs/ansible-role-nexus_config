@@ -1,6 +1,8 @@
 # Description
 
+<!---
 Please include a summary of the change and which issue is fixed.
+--->
 
 ## Type of change
 
@@ -14,6 +16,9 @@ Please include a summary of the change and which issue is fixed.
 
 Please describe the tests that you ran to verify your changes.
 
-## Destination branch
+## How Has This Been Tested?
 
-Create a PR into `develop` branch
+<!---
+Please describe the tests that you ran to verify your changes.
+Create a PR into `main` branch.
+--->
